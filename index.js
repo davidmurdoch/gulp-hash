@@ -36,7 +36,7 @@ var exportObj = function(options) {
 
 			function(flushCb) {
 				if (options.version !== '') hasher.update(String(options.version));
-				file.hash = hasher.digest(options.digest).replace(/[\+\/=]+/g,"").slice(0, options.hashLength);
+				file.hash = hasher.digest(options.digest).replace(/+/g, "-").replace(/\//g, "_").replace(/=/g,"").slice(0, options.hashLength);
 
 				file.origPath = file.relative;
 				file.path = path.join(path.dirname(file.path), template(options.template, {
